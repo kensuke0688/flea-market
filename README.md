@@ -1,6 +1,5 @@
-# flea-market
-# flea-market
-# flea-market
-# flea-market
-# flea-market
-# flea-market
+#coachtechフリマ
+
+##環境構築
+###Dockerビルド
+・git clone 
