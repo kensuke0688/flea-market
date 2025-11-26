@@ -17,7 +17,7 @@
 ・nginx:1.21.1  
 
 ##ER図  
-<img width="967" height="544" alt="Image" src="https://github.com/user-attachments/assets/b17ba61e-c77c-4194-9bbc-d15475febfbe" />
+<img width="1142" height="622" alt="Image" src="https://github.com/user-attachments/assets/59390cb2-e6cc-4704-9cbb-5484b36a344f" />
 
 ##URL  
 ・商品一覧ページ：http://localhost/  
