@@ -1,6 +1,6 @@
-#coachtechフリマ
+# coachtechフリマ
 
-##環境構築  
+## 環境構築  
 ・git clone git@github.com:kensuke0688/flea-market.git  
 ・docker-compose up -d --build  
 ・docker compose exec php bash  
@@ -10,16 +10,16 @@
 ・php artisan migrate  
 ・php artisan db:seed  
 
-##使用技術(実行環境)  
+## 使用技術(実行環境)  
 ・PHP 7.3  
 ・Laravel 8.75  
 ・MySQL 8.0.26  
 ・nginx:1.21.1  
 
-##ER図  
+## ER図  
 <img width="1142" height="622" alt="Image" src="https://github.com/user-attachments/assets/59390cb2-e6cc-4704-9cbb-5484b36a344f" />
 
-##URL  
+## URL  
 ・商品一覧ページ：http://localhost/  
 ・商品詳細ページ：http://localhost/item  
 ・商品購入ページ：http://localhost/purchase  
