@@ -17,7 +17,7 @@
 ・nginx:1.21.1  
 
 ##ER図  
-<img width="1142" height="622" alt="flea-market" src="https://github.com/user-attachments/assets/5b90e71c-943d-4fd7-a098-29b858374804" />  
+<img width="1142" height="622" alt="Image" src="https://github.com/user-attachments/assets/82da218d-2820-4438-b5e8-ede57a351504" />
 
 ##URL  
 ・商品一覧ページ：http://localhost/  
