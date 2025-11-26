@@ -23,7 +23,7 @@
 ・商品一覧ページ：http://localhost/  
 ・商品詳細ページ：http://localhost/item  
 ・商品購入ページ：http://localhost/purchase  
-・商品出品ページ：http://localhost/sell
+・商品出品ページ：http://localhost/sell  
 ・会員登録ページ：http://localhost/register  
 ・メール認証誘導ページ：http://localhost/email/verify  
 ・ログインページ：http://localhost/login  
