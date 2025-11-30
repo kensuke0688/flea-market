@@ -1,0 +1,53 @@
+/* 全体リセット */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Noto Sans JP", sans-serif;
+}
+
+/* ヘッダー */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000;
+    color: #fff;
+    padding: 10px 30px;
+    height: 80px;
+}
+
+.header img {
+    display: block;
+}
+
+.header input[type="search"] {
+    width: 500px;
+    height: 40px;
+    padding: 20px 10px;
+    border-radius: 8px;
+    border: none;
+    font-size:18px;                                                                                          
+}
+
+.header button {
+    background-color: #fff;
+    color: #000;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 4px;
+    font-size: 18px;
+}
+
+
+.header button.mypage,
+.header button.login ,
+.header button.logout{
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    border: none;
+}
+

@@ -1,0 +1,139 @@
+.mypage-container {
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+.mypage-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 80px;
+    margin-bottom: 50px;
+    padding-bottom: 15px;
+}
+
+.mypage-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-img.default {
+    background-color: #d9d9d9;
+    display: inline-block;
+}
+
+.user-name {
+    font-size: 26px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 80px;
+    margin-right: 300px;
+}
+
+.profile-edit-btn {
+    color: #ff5a5f;
+    border: 1px solid #ff5a5f;
+    padding: 5px 50px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.profile-edit-btn:hover {
+    background-color: #ff5a5f;
+    color: #fff;
+}
+
+.mypage-tabs {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    gap: 10px;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+}
+
+.mypage-tabs a{
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.tab {
+    text-align: center;
+    padding: 10px 0;
+    padding-left: 100px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 16px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.tab.active {
+    font-weight: bold;
+    color: red;
+}
+
+.tab:hover {
+    color: red;
+}
+
+.tab-content {
+    display: none;
+    padding-top: 20px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.item-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    justify-content: start;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-top:50px;
+    padding-left: 100px;
+    
+}
+
+.item-card {
+    width: 100%;
+    max-width: 300px;
+    padding-bottom: 50px;;
+
+}
+
+.item-card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+@media screen and (min-width: 1400px) and (max-width: 1540px) {
+
+    .mypage-container {
+        max-width: 1200px;
+    }
+
+    .item-list {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 30px;
+    }
+
+    .item-card img {
+        height: 180px;
+    }
+}
