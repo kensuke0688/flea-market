@@ -4,28 +4,89 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use App\Models\Item;
 use App\Models\Order;
+use App\Models\Review;
+use App\Models\ChatMessage;
 use App\Http\Requests\ProfileRequest;
 
 class MypageController extends Controller
 {
     public function index(Request $request)
     {
-        $user = auth()->user();
-        $page = $request->query('page', 'buy'); 
+        $user = Auth::user();
+        $page = $request->query('page', 'buy');
 
+        // 出品した商品
         $selling_items = Item::where('user_id', $user->id)->get();
 
-        $purchased_items = Order::where('user_id', $user->id)
-            ->with('item')
-            ->get()
-            ->map(function ($order) {
-                return $order->item; 
-            });
+        // 購入した商品
+        $purchased_items = Item::whereHas('orders', function ($q) use ($user) {
+            $q->where('user_id', $user->id);
+        })->get();
 
-        return view('mypage', compact('user', 'page', 'selling_items', 'purchased_items'));
+        // 取引中の商品（注文が存在する商品）
+        $trading_items = Order::with(['item', 'chatRoom.messages'])
+            ->where(function ($q) use ($user) {
+                $q->where('user_id', $user->id)
+                    ->orWhereHas('item', function ($q2) use ($user) {
+                        $q2->where('user_id', $user->id);
+                    });
+            })
+            ->get()
+            ->sortByDesc(function ($order) {
+                return optional($order->chatRoom?->messages->sortByDesc('created_at')->first())->created_at;
+            })
+            ->values();
+
+        // 受け取ったレビュー（評価された側）
+        $ratingData = Review::where('reviewed_id', $user->id)
+            ->selectRaw('AVG(rating) as avg_rating, COUNT(*) as review_count')
+            ->first();
+
+        $userAverageRating = $ratingData->avg_rating;
+        $userReviewCount   = $ratingData->review_count;
+
+        $userRoundedRating = $userAverageRating
+            ? round($userAverageRating)
+            : null;
+
+        $unreadTradingCount = Order::where(function ($q) use ($user) {
+            $q->where('user_id', $user->id)
+                ->orWhereHas('item', function ($q2) use ($user) {
+                    $q2->where('user_id', $user->id);
+                });
+        })
+            ->whereHas('chatRoom.messages', function ($q) use ($user) {
+                $q->where('sender_id', '!=', $user->id)
+                    ->where('is_read', false);
+            })
+            ->count();
+
+        return view('mypage', compact(
+            'user',
+            'page',
+            'selling_items',
+            'purchased_items',
+            'trading_items',
+            'userAverageRating',
+            'userReviewCount',
+            'userRoundedRating',
+            'unreadTradingCount'
+        ));
+
+
+        $unreadTradingCount = Order::where(function ($q) use ($user) {
+            $q->where('user_id', $user->id)
+                ->orWhereHas('item', function ($q2) use ($user) {
+                    $q2->where('user_id', $user->id);
+                });
+        })
+            ->whereHas('chatRoom.messages', function ($q) use ($user) {
+                $q->where('sender_id', '!=', $user->id)
+                    ->where('is_read', false);
+            })
+            ->count();
     }
     
     public function edit()
@@ -37,11 +98,6 @@ class MypageController extends Controller
     public function update(ProfileRequest $request)
     {
         $user = Auth::user();
-
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:20'],
-            'profile_image' => ['nullable', 'image', 'mimes:jpeg,png'], 
-        ]);
 
         if ($request->hasFile('profile_img')) {
             $path = $request->file('profile_img')->store('profiles', 'public');

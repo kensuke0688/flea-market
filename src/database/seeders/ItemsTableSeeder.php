@@ -71,7 +71,7 @@ class ItemsTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'item_name' => 'マイク',
                 'price' => 8000,
                 'description' => '高性能のレコーディング用マイク',
@@ -82,7 +82,7 @@ class ItemsTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'item_name' => 'ショルダーバッグ',
                 'price' => 3500,
                 'description' => 'おしゃれなショルダーバッグ',
@@ -93,7 +93,7 @@ class ItemsTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'item_name' => 'タンブラー',
                 'price' => 500,
                 'description' => '使いやすいタンブラー',
@@ -104,7 +104,7 @@ class ItemsTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'item_name' => 'コーヒーミル',
                 'price' => 4000,
                 'description' => '手動のコーヒーミル',
@@ -115,7 +115,7 @@ class ItemsTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'item_name' => 'メイクセット',
                 'price' => 2500,
                 'description' => '便利なメイクアップセット',

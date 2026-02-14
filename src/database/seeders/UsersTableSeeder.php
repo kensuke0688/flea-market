@@ -17,16 +17,41 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
     [
-        'name' => '山田 太郎',
-        'email' => 'taro@example.com',
-        'password' => Hash::make('password123'), 
+        'id' => 1,
+        'name' => 'ユーザーA',
+        'email' => 'usera@test.com',
+        'password' => Hash::make('password'), 
         'post_number' => '100-0001',
         'address' => '東京都千代田区千代田1-1',
-        'building_name' => '皇居タワー101',
         'profile_img' => 'default.jpg', 
         'created_at' => now(),
         'updated_at' => now(),
     ],
+
+    [
+        'id' => 2,
+        'name' => 'ユーザーB',
+        'email' => 'userb@test.com',
+        'password' => Hash::make('password'),
+        'post_number' => '100-0002',
+        'address' => '東京都練馬区下石神井1-1',
+        'profile_img' => 'default.jpg',
+        'created_at' => now(),
+        'updated_at' => now(),
+    ],
+
+    [
+        'id' => 3,
+        'name' => 'ユーザーC',
+        'email' => 'userc@test.com',
+        'password' => Hash::make('password'),
+        'post_number' => '100-0003',
+        'address' => '東京都練馬区下石神井1-2',
+        'profile_img' => 'default.jpg',
+        'created_at' => now(),
+        'updated_at' => now(),
+    ],
+
 ]);
     }
 }

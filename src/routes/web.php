@@ -7,6 +7,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ItemPurchaseController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\WebhookController;
+use App\Http\Controllers\OrderChatController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', [ItemController::class, 'index']);
+Route::get('/', [ItemController::class, 'index'])->name('home');
 Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('item.show');
 Route::get('/items/search', [ItemController::class, 'search'])
     ->name('items.search');
@@ -56,7 +57,38 @@ Route::middleware('auth')->group(function () {
     Route::put('/purchase/address/{item}', [ItemPurchaseController::class, 'updateAddress'])->name('purchase.address.update');
     Route::get('/sell', [ItemController::class, 'create'])->name('item.sell');
     Route::post('/sell', [ItemController::class, 'store'])->name('item.store');
-// stripeルート
+    Route::get('/trade/{order}/chat', [OrderChatController::class, 'show'])
+        ->name('trade.chat');
+
+    Route::post('/trade/{order}/message', [OrderChatController::class, 'store'])
+        ->name('trade.message.store');
+
+    Route::patch(
+        '/trade/{order}/message/{chatMessage}',
+        [OrderChatController::class, 'update']
+    )
+        ->name('trade.message.update');
+    Route::get(
+        '/trade/{order}/message/{chatMessage}/edit',
+        [OrderChatController::class, 'edit']
+    )
+        ->name('trade.message.edit');
+        
+    Route::delete(
+        '/trade/{order}/message/{chatMessage}',
+        [OrderChatController::class, 'destroy']
+    )
+        ->name('trade.message.destroy');
+
+    Route::post('/trade/{order}/complete', [OrderChatController::class, 'complete'])
+        ->name('trade.complete');
+
+    Route::post(
+        '/trade/{order}/review',
+        [OrderChatController::class, 'storeReview']
+    )->name('trade.review.store');
+
+    // stripeルート
     Route::post('/checkout', [PaymentController::class, 'checkout'])->name('payment.checkout');
     Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
     Route::get('/payment/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');

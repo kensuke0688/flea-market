@@ -9,10 +9,17 @@
 <div class="container">
     <div class="section-header">
         <h1 class="section-title">
-            <a href="{{ url('/') }}{{ request('q') ? '?q=' . request('q') : '' }}" class="{{ request()->is('/') ? 'active' : '' }}">おすすめ</a>
+            <a href="{{ route('home', ['tab' => 'recommend', 'keyword' => request('keyword')]) }}"
+                class="{{ request('tab', 'recommend') === 'recommend' ? 'active' : '' }}">
+                おすすめ
+            </a>
         </h1>
+
         <h1 class="section-title">
-            <a href="{{ route('items.favorites') }}{{ request('q') ? '?q=' . request('q') : '' }}" class="{{ request()->is('mypage/favorites') ? 'active' : '' }}">マイリスト</a>
+            <a href="{{ route('home', ['tab' => 'mylist', 'keyword' => request('keyword')]) }}"
+                class="{{ request('tab') === 'mylist' ? 'active' : '' }}">
+                マイリスト
+            </a>
         </h1>
     </div>
 
@@ -20,7 +27,7 @@
         @foreach($items as $item)
         <div class="card">
             <a href="{{ route('item.show', $item->id) }}">
-                @if ($item->isPurchasedBy(auth()->id()))
+                @if ($item->isPurchased())
                 <div class="sold-overlay">
                     <span>Sold</span>
                 </div>
@@ -29,7 +36,10 @@
                 @if (Str::startsWith($item->item_img, 'http'))
                 <img src="{{ $item->item_img }}" alt="{{ $item->item_name }}">
                 @else
-                <img src="{{ asset('storage/' . $item->item_img) }}" alt="{{ $item->item_name }}" class="{{ $item->isPurchasedBy(auth()->id()) ? 'darkened' : '' }}">
+                <img
+                    src="{{ asset('storage/' . $item->item_img) }}"
+                    alt="{{ $item->item_name }}"
+                    class="{{ $item->isPurchased() ? 'darkened' : '' }}">
                 @endif
                 <p class="card-title">{{ $item->item_name }}</p>
             </a>

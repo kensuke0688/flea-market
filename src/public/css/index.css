@@ -107,12 +107,3 @@
     text-decoration: none;
 }
 
-@media screen and (min-width: 1400px) and (max-width: 1540px) {
-    .container {
-        max-width: 1300px;
-    }
-
-    .card {
-        width: calc(25% - 15px);
-    }
-}

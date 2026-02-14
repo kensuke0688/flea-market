@@ -11,25 +11,33 @@ use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $userId = Auth::id();
+        $tab = $request->query('tab', 'recommend');
+        $keyword = $request->query('keyword');
 
-        $items = Item::with('orders')
-            ->where('user_id', '!=', $userId)
-            ->get();
-        return view('index', compact('items'));
-    }
+        $query = Item::query();
 
-    public function search(Request $request)
-    {
-        $keyword = $request->input('keyword');
+        // ✅ ログイン時のみ自分の商品を除外
+        if (Auth::check()) {
+            $query->where('user_id', '!=', Auth::id());
+        }
 
-        $items = Item::when($keyword, function ($query) use ($keyword) {
-            return $query->where('item_name', 'LIKE', "%{$keyword}%");
-        })->get();
+        // マイリスト
+        if ($tab === 'mylist' && Auth::check()) {
+            $query->whereHas('favoritedBy', function ($q) {
+                $q->where('user_id', Auth::id());
+            });
+        }
 
-        return view('index', compact('items', 'keyword'));
+        // 検索
+        if (!empty($keyword)) {
+            $query->where('item_name', 'LIKE', "%{$keyword}%");
+        }
+
+        $items = $query->get();
+
+        return view('index', compact('items', 'keyword', 'tab'));
     }
 
     public function show($item_id)

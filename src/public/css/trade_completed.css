@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Noto Sans JP", sans-serif;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000;
+    color: #fff;
+    padding: 10px 30px;
+    height: 80px;
+}
+
+.header img {
+    display: block;
+}
+
+.verify-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.verify-inner {
+    text-align: center;
+    padding: 40px;
+
+}
+
+.verify-message {
+    margin-bottom: 30px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-gray {
+    background-color: #D9D9D9;
+    color: #000000;
+    border: 1px solid #000000;
+    font-size: 24px;
+    margin-bottom: 50px;
+}
+
+.btn-link {
+    background-color: transparent;
+    color: #007bff;
+    border: none;
+    text-decoration: none;
+    padding: 0;
+    font-weight: normal;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.resend-message {
+    color: green;
+    margin-top: 10px;
+}

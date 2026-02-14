@@ -15,7 +15,12 @@
 .mypage-profile {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 50px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
 }
 
 .profile-img {
@@ -23,6 +28,7 @@
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
+    background-color: #D9D9D9;
 }
 
 .profile-img.default {
@@ -31,11 +37,32 @@
 }
 
 .user-name {
-    font-size: 26px;
+    font-size: 28px;
     font-weight: bold;
     color: #333;
-    margin-left: 80px;
-    margin-right: 300px;
+    margin: 0;
+}
+
+.user-rating {
+    margin-top: 6px;
+}
+
+.user-rating .star {
+    font-size: 30px;
+}
+
+.user-rating .filled {
+    color: gold;
+}
+
+.user-rating .empty {
+    color: #ccc;
+}
+
+.rating-number {
+    margin-left: 6px;
+    font-size: 14px;
+    color: #666;
 }
 
 .profile-edit-btn {
@@ -112,7 +139,24 @@
     width: 100%;
     max-width: 300px;
     padding-bottom: 50px;;
+    position: relative;
+}
 
+.item-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    background: #e53935;
+    color: white;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .item-card img {
@@ -120,6 +164,34 @@
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 10px;
+}
+
+.tab.trading {
+    color: red;
+}
+
+.badge {
+    background: red;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 50%;
+    padding: 2px 6px;
+    margin-left: 4px;
+}
+
+.item-card {
+    position: relative;
+}
+
+.trading-badge {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    background: red;
+    color: #fff;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
 }
 
 @media screen and (min-width: 1400px) and (max-width: 1540px) {

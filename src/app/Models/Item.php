@@ -44,13 +44,15 @@ class Item extends Model
         return $this->favorites()->count();
     }
 
-    public function isPurchasedBy($userId)
-    {
-        return $this->orders()->where('user_id', $userId)->exists();
-    }
-
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function isPurchased()
+    {
+        return $this->orders()
+            ->where('status', 'completed')
+            ->exists();
     }
 }

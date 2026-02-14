@@ -12,9 +12,18 @@
 
 <body>
     <header class="header">
-        <img src="{{ asset('img/logo.svg') }}" alt="coachtech" width="240" height="80">
-        <form class="search-form" action="{{ route('items.search') }}" method="GET">
-            <input type="search" name="keyword" placeholder="なにをお探しですか?" value="{{ request('keyword') }}">
+        <a href="{{ route('home') }}">
+            <img src="{{ asset('img/logo.svg') }}" alt="coachtech" width="240" height="80">
+        </a>
+        <form class="search-form" action="{{ route('home') }}" method="GET">
+
+            {{-- タブ状態保持 --}}
+            <input type="hidden" name="tab" value="{{ request('tab', 'recommend') }}">
+
+            <input type="search"
+                name="keyword"
+                placeholder="なにをお探しですか?"
+                value="{{ request('keyword') }}">
         </form>
         @guest
         <form class="form" action="/login" method="GET">

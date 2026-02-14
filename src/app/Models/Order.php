@@ -19,4 +19,19 @@ class Order extends Model
     {
         return $this->belongsTo(Item::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function seller()
+    {
+        return $this->belongsTo(User::class, 'seller_id');
+    }
+
+    public function chatRoom()
+    {
+        return $this->hasOne(ChatRoom::class);
+    }
 }
