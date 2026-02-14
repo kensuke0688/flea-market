@@ -153,7 +153,10 @@ class OrderChatController extends Controller
     public function complete(Order $order)
     {
 
-        $order->update(['is_completed' => true]);
+        $order->update([
+            'status' => 'completed',
+            'is_completed' => true,
+        ]);
 
         $seller = $order->item->user;
 

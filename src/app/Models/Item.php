@@ -52,7 +52,7 @@ class Item extends Model
     public function isPurchased()
     {
         return $this->orders()
-            ->where('status', 'completed')
+            ->whereIn('status', ['trading', 'completed'])
             ->exists();
     }
 }

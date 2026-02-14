@@ -1,4 +1,3 @@
-/* 全体 */
 .trade-chat {
     font-family: "Helvetica Neue", Arial, sans-serif;
     background: #f5f5f5;
@@ -10,7 +9,6 @@ body {
     height: 100%;
 }
 
-/* ヘッダー */
 .header {
     display: flex;
     align-items: center;
@@ -21,13 +19,13 @@ body {
     height: 80px;
 }
 
-/* ボディ */
 .trade-body {
     display: flex;
     min-height: 100vh;
+    max-width: 1500px;
+    margin: 0 auto;
 }
 
-/* サイドバー */
 .trade-sidebar {
     width: 220px;
     background: #868686;
@@ -41,7 +39,6 @@ body {
 
 .other-trade-list {
     list-style: none;
-    /* ← 黒ポツ削除 */
     padding: 0;
     margin: 0;
 }
@@ -61,14 +58,12 @@ body {
     font-size: 14px;
 }
 
-/* メイン */
 .trade-main {
     flex: 1;
     background: #fff;
     padding: 20px 30px;
 }
 
-/* 取引相手ヘッダー */
 .trade-partner {
     display: flex;
     align-items: center;
@@ -79,7 +74,6 @@ body {
 .trade-partner h2 {
     font-size: 24px;
     margin: 0 0 0 12px;
-    /* アイコンとの間隔 */
 }
 
 .trade-partner form {
@@ -103,7 +97,6 @@ body {
     margin-left: auto;
 }
 
-/* 商品情報 */
 .trade-item {
     display: flex;
     align-items: center;
@@ -128,12 +121,10 @@ body {
     font-size: 20px;
 }
 
-/* チャットエリア */
 .chat-area {
     padding: 30px 0;
 }
 
-/* メッセージ共通 */
 .chat-message {
     display: flex;
     margin-bottom: 25px;
@@ -147,7 +138,6 @@ body {
     justify-content: flex-end;
 }
 
-/* ユーザーアイコン */
 .chat-user-icon {
     width: 40px;
     height: 40px;
@@ -155,7 +145,6 @@ body {
     border-radius: 50%;
 }
 
-/* チャット内容 */
 .chat-content {
     max-width: 65%;
     margin: 0 10px;
@@ -166,7 +155,6 @@ body {
     margin-bottom: 5px;
 }
 
-/* 吹き出し */
 .chat-bubble {
     background: #D9D9D9;
     padding: 10px 14px;
@@ -180,12 +168,10 @@ body {
     line-height: 1.5;
 }
 
-/* 右側（自分） */
 .chat-message.right .chat-bubble {
     background: #d9d9d9;
 }
 
-/* 編集・削除 */
 .chat-actions {
     font-size: 12px;
     margin-top: 5px;
@@ -195,13 +181,11 @@ body {
 .message-actions {
     display: flex;
     gap: 12px;
-    /* ボタン間の余白 */
     margin-top: 6px;
 }
 
 .message-actions form {
     margin: 0;
-    /* フォームの余白リセット */
 }
 
 .action-btn {
@@ -224,7 +208,6 @@ body {
     color: #555;
 }
 
-/* メッセージフォーム */
 .chat-form {
     position: fixed;
     bottom: 0;
@@ -259,31 +242,28 @@ body {
     cursor: pointer;
 }
 
-/* ヘッダー */
 .modal-header {
     padding: 20px;
     border-bottom: 1px solid #333;
 }
 
-.modal-header h3 {
+.modal-header h2 {
     margin: 0;
     font-size: 1.4rem;
     color: #000;
 }
 
-/* ボディ */
 .modal-body {
-    padding: 30px 20px;
+    padding: 10px 10px;
     text-align: center;
 }
 
 .modal-body p {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     color: #666;
-    font-size: 0.9rem;
+    text-align: left;
 }
 
-/* 星評価 */
 .stars-container {
     display: flex;
     justify-content: center;
@@ -291,25 +271,28 @@ body {
     margin-bottom: 10px;
 }
 
+.stars {
+    font-size: 70px;
+    margin-bottom: 10px;
+}
+
 .star {
-    font-size: 3rem;
     cursor: pointer;
-    color: #dcdcdc;
-    /* 未選択時はグレー */
+    color: #ccc;
     transition: color 0.2s;
 }
 
-/* アクティブ（選択中）の星の色 */
 .star.active {
-    color: #fce83a;
-    /* 画像のような黄色 */
+    color: #f4d03f;
 }
 
 /* フッター */
 .modal-footer {
-    padding: 10px 20px 20px;
-    text-align: right;
-    border-top: 1px solid #333;
+    border-top: 1px solid #888;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 -20px;
 }
 
 /* 送信ボタン */
@@ -350,32 +333,56 @@ body {
 }
 
 .modal-content {
-    background: #e9e4cf;
-    padding: 30px;
-    border-radius: 12px;
+    background: #FDFCE6;
+    /* 画像っぽいベージュ */
     width: 500px;
-}
-
-.stars {
-    font-size: 40px;
-    color: #ccc;
-    margin: 20px 0;
-}
-
-.star.active {
-    color: gold;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #999;
 }
 
 .review-submit {
-    background: #f48b8b;
+    background: #FF8282;
     border: none;
-    padding: 10px 25px;
+    padding: 10px 20px;
     border-radius: 6px;
     color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.review-submit:hover {
+    opacity: 0.9;
 }
 
 .chat-error {
     color: #d8000c;
     padding: 30px 15px;
     margin-bottom: 30px;
+}
+
+@media (max-width: 850px) {
+
+    .trade-body {
+        flex-direction: column;
+    }
+
+    .trade-sidebar {
+        width: 100%;
+        order: 2;
+    }
+
+    .trade-main {
+        order: 1;
+    }
+
+    .chat-content {
+        max-width: 80%;
+    }
+
+    .chat-image {
+        max-width: 100%;
+        height: auto;
+    }
+
 }

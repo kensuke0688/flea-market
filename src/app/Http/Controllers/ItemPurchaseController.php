@@ -37,7 +37,6 @@ class ItemPurchaseController extends Controller
         return view('address_edit', compact('item', 'user'));
     }
 
-    // 配送先住所の更新処理
     public function updateAddress(Request $request, $item_id)
     {
         $request->validate([

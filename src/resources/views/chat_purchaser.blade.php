@@ -191,19 +191,28 @@
 
 <div id="reviewModal" class="modal">
     <div class="modal-content">
-        <h2>取引が完了しました。</h2>
-        <p>今回の取引相手はどうでしたか？</p>
 
-        <form method="POST" action="{{ route('trade.review.store', $order->id) }}">
-            @csrf
-            <div class="stars">
-                @for($i=1; $i<=5; $i++)
-                    <span class="star" data-value="{{ $i }}">★</span>
-                    @endfor
-            </div>
-            <input type="hidden" name="rating" id="ratingInput">
-            <button type="submit" class="review-submit">送信する</button>
-        </form>
+        <div class="modal-header">
+            <h2>取引が完了しました。</h2>
+        </div>
+        <div class="modal-body">
+            <p>今回の取引相手はどうでしたか？</p>
+            <form method="POST" action="{{ route('trade.review.store', $order->id) }}">
+                @csrf
+                <div class="stars">
+                    @for($i=1; $i<=5; $i++)
+                        <span class="star" data-value="{{ $i }}">★</span>
+                        @endfor
+                </div>
+                <input type="hidden" name="rating" id="ratingInput">
+                <div class="modal-footer">
+                    <button type="submit" class="review-submit">
+                        送信する
+                    </button>
+                </div>
+            </form>
+        </div>
+
     </div>
 </div>
 

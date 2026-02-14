@@ -18,19 +18,16 @@ class ItemController extends Controller
 
         $query = Item::query();
 
-        // ✅ ログイン時のみ自分の商品を除外
         if (Auth::check()) {
             $query->where('user_id', '!=', Auth::id());
         }
 
-        // マイリスト
         if ($tab === 'mylist' && Auth::check()) {
             $query->whereHas('favoritedBy', function ($q) {
                 $q->where('user_id', Auth::id());
             });
         }
 
-        // 検索
         if (!empty($keyword)) {
             $query->where('item_name', 'LIKE', "%{$keyword}%");
         }
