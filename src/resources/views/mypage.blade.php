@@ -73,8 +73,6 @@
 
             <a href="{{ route('trade.chat', $order->id) }}"
                 class="item-card link-card">
-
-                {{-- 🔴 未読バッジ --}}
                 @if($unreadCount > 0)
                 <span class="item-badge">
                     {{ $unreadCount }}

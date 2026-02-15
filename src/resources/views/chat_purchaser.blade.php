@@ -14,8 +14,6 @@
 
 <div class="trade-chat">
     <div class="trade-body">
-
-        {{-- 左サイドバー --}}
         <aside class="trade-sidebar">
             <p class="sidebar-title">その他の取引</p>
 
@@ -32,15 +30,11 @@
             </ul>
         </aside>
 
-        {{-- メイン --}}
         <main class="trade-main">
 
-            {{-- 取引相手 --}}
             <div class="trade-partner">
                 <div class="partner-icon"></div>
                 <h2>「{{ $partner->name ?? 'ユーザー名' }}」さんとの取引画面</h2>
-
-                <!-- 【修正】フォームではなく、モーダルを開くボタンにします -->
                 @if(auth()->id() === $order->user_id && !$order->is_completed)
                 <form method="POST" action="{{ route('trade.complete', $order->id) }}">
                     @csrf
@@ -51,8 +45,6 @@
                 @endif
             </div>
 
-            {{-- 商品情報（★ 画像クリックでチャット遷移する想定） --}}
-            {{-- 商品情報 --}}
             <div class="trade-item">
                 <div class="item-image">
                     <img src="{{ $order->item->item_img }}"
@@ -66,7 +58,6 @@
                 </div>
             </div>
 
-            {{-- チャットエリア --}}
             <div class="chat-area">
                 @foreach ($messages as $message)
 
@@ -86,7 +77,6 @@
                             @endif
                         </div>
 
-                        {{-- 編集・削除ボタン --}}
                         <div class="message-actions">
                             <a href="{{ route('trade.message.edit',
                 ['order' => $order->id, 'chatMessage' => $message->id]) }}"
@@ -111,7 +101,6 @@
                 </div>
 
                 @else
-                {{-- 相手のメッセージ --}}
                 <div class="chat-message left">
                     <div class="chat-user-icon"></div>
 
@@ -135,7 +124,6 @@
                 @endforeach
             </div>
 
-            {{-- メッセージ送信 --}}
             @if ($errors->any())
             <div class="chat-error">
                 @foreach ($errors->all() as $error)
@@ -147,7 +135,7 @@
                 action="{{ session('editingMessageId')
             ? route('trade.message.update',
                 ['order' => $order->id,
-                 'chatMessage' => session('editingMessageId')])
+                'chatMessage' => session('editingMessageId')])
             : route('trade.message.store', $order->id) }}"
                 class="chat-form"
                 enctype="multipart/form-data">
@@ -167,7 +155,6 @@
             : '' }}"
                     placeholder="取引メッセージを記入してください">
 
-                {{-- 画像ボタンは常に表示 --}}
                 <label class="image-upload">
                     画像を追加
                     <input type="file"
@@ -244,26 +231,18 @@
     });
 
     document.addEventListener("DOMContentLoaded", function() {
-
         const input = document.getElementById("chatInput");
-
         if (!input) return;
-
-        // 取引ごとに保存するためキーを分ける
         const storageKey = "chat_draft_{{ $order->id }}";
-
-        // 保存されている内容を復元
         const saved = localStorage.getItem(storageKey);
         if (saved) {
             input.value = saved;
         }
 
-        // 入力が変わるたび保存
         input.addEventListener("input", function() {
             localStorage.setItem(storageKey, input.value);
         });
 
-        // 送信時は削除
         input.closest("form").addEventListener("submit", function() {
             localStorage.removeItem(storageKey);
         });

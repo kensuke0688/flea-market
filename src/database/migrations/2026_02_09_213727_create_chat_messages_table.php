@@ -10,9 +10,9 @@ return new class extends Migration
     {
         Schema::create('chat_messages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('chat_room_id');   // どのチャットルームか
-            $table->unsignedBigInteger('sender_id');      // 送信者
-            $table->text('message_text');                 // メッセージ内容
+            $table->unsignedBigInteger('chat_room_id');
+            $table->unsignedBigInteger('sender_id');
+            $table->text('message_text');
             $table->boolean('is_read')->default(false);
             $table->timestamps();
 

@@ -8,6 +8,7 @@ use App\Models\Item;
 use App\Models\Order;
 use App\Models\Review;
 use App\Models\ChatMessage;
+
 use App\Http\Requests\ProfileRequest;
 
 class MypageController extends Controller
@@ -16,16 +17,11 @@ class MypageController extends Controller
     {
         $user = Auth::user();
         $page = $request->query('page', 'buy');
-
-        // 出品した商品
         $selling_items = Item::where('user_id', $user->id)->get();
-
-        // 購入した商品
         $purchased_items = Item::whereHas('orders', function ($q) use ($user) {
             $q->where('user_id', $user->id);
         })->get();
 
-        // 取引中の商品（注文が存在する商品）
         $trading_items = Order::with(['item', 'chatRoom.messages'])
             ->where(function ($q) use ($user) {
                 $q->where('user_id', $user->id)
@@ -39,7 +35,6 @@ class MypageController extends Controller
             })
             ->values();
 
-        // 受け取ったレビュー（評価された側）
         $ratingData = Review::where('reviewed_id', $user->id)
             ->selectRaw('AVG(rating) as avg_rating, COUNT(*) as review_count')
             ->first();
@@ -51,16 +46,14 @@ class MypageController extends Controller
             ? round($userAverageRating)
             : null;
 
-        $unreadTradingCount = Order::where(function ($q) use ($user) {
+        $unreadTradingCount = ChatMessage::whereHas('chatRoom.order', function ($q) use ($user) {
             $q->where('user_id', $user->id)
                 ->orWhereHas('item', function ($q2) use ($user) {
                     $q2->where('user_id', $user->id);
                 });
         })
-            ->whereHas('chatRoom.messages', function ($q) use ($user) {
-                $q->where('sender_id', '!=', $user->id)
-                    ->where('is_read', false);
-            })
+            ->where('sender_id', '!=', $user->id)
+            ->where('is_read', false)
             ->count();
 
         return view('mypage', compact(

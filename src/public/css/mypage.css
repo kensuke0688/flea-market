@@ -176,7 +176,8 @@
     font-size: 12px;
     border-radius: 50%;
     padding: 2px 6px;
-    margin-left: 4px;
+    top: 6px;
+    left: 6px;
 }
 
 .item-card {
@@ -192,6 +193,16 @@
     font-size: 12px;
     padding: 2px 6px;
     border-radius: 50%;
+}
+
+.link-card {
+    text-decoration: none;
+    color: inherit;
+}
+
+.link-card:hover {
+    text-decoration: none;
+    color: inherit;
 }
 
 @media screen and (min-width: 1400px) and (max-width: 1540px) {

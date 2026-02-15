@@ -17,8 +17,6 @@ class OrderChatController extends Controller
     public function show(Order $order)
     {
         $user = auth()->user();
-
-        // チャットルーム取得 or 作成
         $chatRoom = ChatRoom::where('order_id', $order->id)->first();
         if (!$chatRoom) {
             $chatRoom = ChatRoom::create([
@@ -33,7 +31,6 @@ class OrderChatController extends Controller
             ->where('is_read', false)
             ->update(['is_read' => true]);
 
-        // 両者評価済みならチャット画面は存在しない（404）
         $buyerReviewed = Review::where('order_id', $order->id)
             ->where('reviewer_id', $order->user_id)
             ->exists();
@@ -42,46 +39,35 @@ class OrderChatController extends Controller
             ->where('reviewer_id', $order->item->user_id)
             ->exists();
 
-        // チャットメッセージ取得
         $messages = $chatRoom->messages()
             ->with('sender')
             ->orderBy('created_at')
             ->get();
 
-        // 取引相手
         $partner = $user->id === $chatRoom->buyer_id
             ? User::find($chatRoom->seller_id)
             : User::find($chatRoom->buyer_id);
 
-        // その他の自分の取引
         $otherOrders = Order::with('item')
             ->where(function ($q) use ($user) {
-
-                // 自分が購入者
                 $q->where('user_id', $user->id)
-
-                    // または自分が出品者
                     ->orWhereHas('item', function ($q2) use ($user) {
                         $q2->where('user_id', $user->id);
                     });
             })
-            ->where('id', '!=', $order->id) // 今開いている取引は除外
+            ->where('id', '!=', $order->id)
             ->get();
 
-        // 自分がレビュー済みか
         $isBuyer  = $user->id === $order->user_id;
         $isSeller = $user->id === $order->item->user_id;
 
         $shouldShowModal = false;
-
-        // 購入者：完了ボタン押した直後のみ
         $flash = session('showReviewModal');
 
         if ($isBuyer && $flash && !$buyerReviewed) {
             $shouldShowModal = true;
         }
 
-        // 出品者：購入者が評価済みかつ未評価
         if ($isSeller && $buyerReviewed && !$sellerReviewed) {
             $shouldShowModal = true;
         }

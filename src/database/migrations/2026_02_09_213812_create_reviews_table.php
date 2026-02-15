@@ -13,10 +13,10 @@ return new class extends Migration
         $table->foreignId('order_id')->constrained()->onDelete('cascade');
         $table->foreignId('reviewer_id')->constrained('users')->onDelete('cascade');
         $table->foreignId('reviewed_id')->constrained('users')->onDelete('cascade');
-        $table->integer('rating'); // 1〜5
+        $table->integer('rating'); 
         $table->timestamps();
 
-        $table->unique(['order_id', 'reviewer_id']); // 1取引1回のみ
+        $table->unique(['order_id', 'reviewer_id']); 
     });
 }
 
